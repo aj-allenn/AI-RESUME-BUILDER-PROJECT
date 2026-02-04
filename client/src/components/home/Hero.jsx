@@ -65,7 +65,7 @@ const Hero = () => {
                     <div className="flex items-center mt-24">
                         <div className="flex -space-x-3 pr-3">
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200" alt="user3" className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[1]" />
-                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200" alt="user1" className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-2" />
+                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200" alt="user1" className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[2]" />
                             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200" alt="user2" className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[3]" />
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200" alt="user3" className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[4]" />
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="user5" className="size-8 rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[5]" />
@@ -85,14 +85,14 @@ const Hero = () => {
 
                     {/* Headline + CTA */}
                     <h1 className="text-5xl md:text-6xl font-semibold max-w-5xl text-center mt-4 md:leading-[70px]">
-                        Land your dream job with<span className=" bg-gradient-to-r from-violet-700 to-violet-600 bg-clip-text text-transparent text-nowrap"> AI-Powered </span> Resumes.
+                        Land your dream job with<span className=" bg-gradient-to-r from-violet-700 to-[#E0724A] bg-clip-text text-transparent text-nowrap"> AI-Powered </span> Resumes.
                     </h1>
 
                     <p className="max-w-md text-center text-base my-7">Create edit and download professional resumes with AI-powered assistance .</p>
 
                     {/* CTA Buttons */}
                     <div className="flex items-center gap-4 ">
-                        <Link to={"/builder"} className="bg-violet-500 hover:bg-violet-600 text-white rounded-full px-9 h-12 m-1 ring-offset-2 ring-1 ring-violet-400 flex items-center transition-colors">
+                        <Link to={"/builder"} className="bg-[#E0724A] hover:bg-violet-600 text-white rounded-full px-9 h-12 m-1 ring-offset-2 ring-1 ring-violet-400 flex items-center transition-colors">
                             Get started
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right ml-1 size-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                         </Link>
