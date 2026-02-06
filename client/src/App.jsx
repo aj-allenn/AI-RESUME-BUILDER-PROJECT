@@ -60,10 +60,10 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom'
 import Home from './pages/Home';
-import Builder from './pages/Builder';
-import { Layout } from 'lucide-react';
-import Dashboard from './pages/Dashboard';
-import Preview from './pages/Preview';
+import Builder from './pages/Builder.jsx';
+import Layout from './pages/Layout';
+import Dashboard from './pages/Dashboard.jsx';
+import Preview from './pages/Preview.jsx';
 import Login from './pages/Login';
 
 
@@ -73,6 +73,7 @@ function App() {
     <>
       <Routes>
        <Route path="/" element={<Home/>} />
+
        <Route path="app" element={<Layout/>}>
          <Route index element={<Dashboard/>}/>
          <Route path='builder/:resumeId' element={<Builder/>}/>
