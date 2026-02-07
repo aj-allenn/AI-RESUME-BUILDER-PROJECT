@@ -65,6 +65,7 @@ import Layout from './pages/Layout';
 import Dashboard from './pages/Dashboard.jsx';
 import Preview from './pages/Preview.jsx';
 import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoutes.jsx';
 
 
 
@@ -74,7 +75,15 @@ function App() {
       <Routes>
        <Route path="/" element={<Home/>} />
 
-       <Route path="app" element={<Layout/>}>
+       <Route 
+       path="app"
+       element={
+         <ProtectedRoute>
+           <Layout/>
+          </ProtectedRoute>
+        }>
+
+
          <Route index element={<Dashboard/>}/>
          <Route path='builder/:resumeId' element={<Builder/>}/>
        </Route>
