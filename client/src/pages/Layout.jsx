@@ -15,7 +15,7 @@ const Layout = () => {
     <div className="min-h-screen bg-gray-50">
       
       {/* Top bar / Navbar */}
-      <div className="h-14 bg-indigo-900 text-white flex justify-between items-center px-6">
+      <div className="h-14 bg-indigo-500 text-white flex justify-between items-center px-6">
         <h1 className="text-lg font-semibold">AI Resume Builder</h1>
 
       <div>
