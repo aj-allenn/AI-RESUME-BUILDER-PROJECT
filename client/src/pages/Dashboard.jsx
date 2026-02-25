@@ -1,6 +1,6 @@
 
-import { PlusIcon, Upload, UploadCloudIcon, XIcon } from 'lucide-react'
-import React, { useState } from 'react';
+import { PlusIcon, Upload, UploadCloudIcon, XIcon, FileText, Trash2, Edit, Eye } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
 import {useNavigate } from "react-router-dom"
 
 const Dashboard = () => {
@@ -9,30 +9,125 @@ const Dashboard = () => {
   const [showUploadResume,setshowUploadResume]=useState(false)
   const [title,setTitle] = useState("")
   const [resume,setResume] = useState(null)
-  const [editResumeId,setResumeId]=useState("")
+  const [resumes, setResumes] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
 
   const navigate= useNavigate()
 
+  useEffect(() => {
+    loadUser();
+    loadResumes();
+  }, []);
 
+  const loadUser = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch('http://localhost:5000/auth/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      }
+    } catch (error) {
+      console.error("Error loading user:", error);
+    }
+  };
 
+  const loadResumes = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch('http://localhost:5000/api/resumes', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setResumes(data);
+      }
+    } catch (error) {
+      console.error("Error loading resumes:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-const createResume=async (event)=>{
-  event.preventDefault()
-  setshowCreateResume(false)
-  navigate(`/app//builder/resume123`)
-}
+  const createResume=async (event)=>{
+    event.preventDefault()
+    if (!title.trim()) {
+      alert('Please enter a resume title');
+      return;
+    }
+    
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch('http://localhost:5000/api/resumes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: title.trim(),
+        }),
+      });
 
-const uploadResume = async (event)=>{
-  event.preventDefault()
-  setshowUploadResume(false)
-  navigate(`/app/builder/resume123`)
-}
+      if (res.ok) {
+        const data = await res.json();
+        setshowCreateResume(false);
+        setTitle("");
+        navigate(`/app/builder/${data._id}`);
+      } else {
+        alert('Failed to create resume');
+      }
+    } catch (error) {
+      console.error("Error creating resume:", error);
+      alert('Error creating resume');
+    }
+  }
+
+  const deleteResume = async (id) => {
+    if (!confirm('Are you sure you want to delete this resume?')) return;
+    
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/api/resumes/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        loadResumes();
+      } else {
+        alert('Failed to delete resume');
+      }
+    } catch (error) {
+      console.error("Error deleting resume:", error);
+      alert('Error deleting resume');
+    }
+  };
+
+  const uploadResume = async (event)=>{
+    event.preventDefault()
+    // TODO: Implement PDF upload and parsing
+    alert('PDF upload feature coming soon!');
+    setshowUploadResume(false)
+  }
 
 
   return (
     <div>
         <div className='max-w-7xl mx-auto px-4 py-8'>
-        <p className='text-2xl font-medium m-6 bg-gradient-to-r from-slate-600 to-slate-700 bg-clip-text text-transparent sm:hidden'>Welcome, Allen</p>
+        <p className='text-2xl font-medium m-6 bg-gradient-to-r from-slate-600 to-slate-700 bg-clip-text text-transparent sm:hidden'>
+          Welcome, {user?.name || 'User'}
+        </p>
 
         <div className='flex gap-4'>
 
@@ -59,13 +154,70 @@ const uploadResume = async (event)=>{
 
         <hr className='border-slate-500 my-6 sm:w-[305px]'/>
 
+        {/* Existing Resumes */}
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Resumes</h2>
+          {loading ? (
+            <p className="text-gray-500">Loading resumes...</p>
+          ) : resumes.length === 0 ? (
+            <p className="text-gray-500">No resumes yet. Create your first resume above!</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {resumes.map((resume) => (
+                <div
+                  key={resume._id}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <FileText className="size-5 text-indigo-600" />
+                      <h3 className="font-semibold text-gray-800">{resume.title || 'Untitled Resume'}</h3>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-4">
+                    Updated {new Date(resume.updatedAt).toLocaleDateString()}
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => navigate(`/app/builder/${resume._id}`)}
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors text-sm"
+                    >
+                      <Edit className="size-4" />
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => navigate(`/view/${resume._id}`)}
+                      className="flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm"
+                    >
+                      <Eye className="size-4" />
+                    </button>
+                    <button
+                      onClick={() => deleteResume(resume._id)}
+                      className="flex items-center justify-center gap-2 px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm"
+                    >
+                      <Trash2 className="size-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
 
        {showCreateResume && (
         <form onSubmit={createResume} onClick={()=>{setshowCreateResume(false)}} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
          
          <div onClick={e=> e.stopPropagation()} className='relative bg-slate-50 border shadoow-md rounded-lg w-full max-w-sm p-6'>
             <h2 className='text-xl font-bold mb-4'>Create a resume</h2>
-            <input type="text" placeholder='enter resume title' className='w-full px-4 py-2 mb-4 focus:border-violet-600 ring-violet-600' required />
+            <input 
+              type="text" 
+              value={title}
+              onChange={(e)=>setTitle(e.target.value)}
+              placeholder='enter resume title' 
+              className='w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:border-violet-600 focus:ring-violet-600 outline-none' 
+              required 
+            />
 
             <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>Create Resume</button>
 

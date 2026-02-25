@@ -32,7 +32,7 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                 {/* Name + Title */}
                 <div className="col-span-2 flex flex-col justify-center py-10 px-8">
                     <h1 className="text-4xl font-bold text-zinc-700 tracking-widest">
-                        {data.personal_info?.full_name || "Your Name"}
+                        {data.personal_info?.fullname || "Your Name"}
                     </h1>
                     <p className="uppercase text-zinc-600 font-medium text-sm tracking-widest">
                         {data?.personal_info?.profession || "Profession"}
@@ -82,7 +82,7 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                                         <p className="font-semibold uppercase">{edu.degree}</p>
                                         <p className="text-zinc-600">{edu.institution}</p>
                                         <p className="text-xs text-zinc-500">
-                                            {formatDate(edu.graduation_date)}
+                                            {formatDate(edu.start_date)} - {edu.is_current ? "Present" : formatDate(edu.end_date)}
                                         </p>
                                     </div>
                                 ))}
@@ -155,24 +155,36 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                     )}
 
                     {/* Projects */}
-                    {data.project && data.project.length > 0 && (
+                    {data.projects && data.projects.length > 0 && (
                         <section>
                             <h2 className="text-sm uppercase tracking-widest font-semibold" style={{ color: accentColor }}>
                                 PROJECTS
                             </h2>
                             <div className="space-y-4">
-                                {data.project.map((project, index) => (
+                                {data.projects.map((project, index) => (
                                     <div key={index}>
-                                        <h3 className="text-md font-medium text-zinc-800 mt-3">{project.name}</h3>
-                                        <p className="text-sm mb-1" style={{ color: accentColor }} >
-                                            {project.type}
-                                        </p>
+                                        <div className="flex justify-between items-start mb-1">
+                                            <h3 className="text-md font-medium text-zinc-800 mt-3">{project.name}</h3>
+                                            {project.start_date && (
+                                                <span className="text-xs text-zinc-500">
+                                                    {formatDate(project.start_date)} - {project.end_date ? formatDate(project.end_date) : "Present"}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {project.technologies && (
+                                            <p className="text-sm mb-1" style={{ color: accentColor }} >
+                                                {project.technologies}
+                                            </p>
+                                        )}
                                         {project.description && (
-                                            <ul className="list-disc list-inside text-sm text-zinc-700  space-y-1">
-                                                {project.description.split("\n").map((line, i) => (
-                                                    <li key={i}>{line}</li>
-                                                ))}
-                                            </ul>
+                                            <div className="text-sm text-zinc-700 leading-relaxed whitespace-pre-line">
+                                                {project.description}
+                                            </div>
+                                        )}
+                                        {project.link && (
+                                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:underline">
+                                                {project.link}
+                                            </a>
                                         )}
                                     </div>
                                 ))}

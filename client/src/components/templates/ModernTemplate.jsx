@@ -11,7 +11,7 @@ const ModernTemplate = ({ data, accentColor }) => {
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto h-29 bg-blue-600 text-gray-800">
+		<div className="max-w-4xl mx-auto bg-white text-gray-800 shadow-llg">
 			{/* Header */}
 			<header className=" p-8 text-white " style={{ backgroundColor: accentColor }}>
 				<h1 className="max-w-4xl text-4xl font-light mb-3">
@@ -95,34 +95,99 @@ const ModernTemplate = ({ data, accentColor }) => {
 				)}
 
 				{/* Projects */}
-				{data.project && data.project.length > 0 && (
+
+
+         {/* Projects */}
+{data.projects && data.projects.length > 0 && (
+  <section className="mb-8">
+    <h2 className="text-2xl font-light mb-6 pb-2 border-b border-gray-200">
+      Projects
+    </h2>
+
+    <div className="space-y-6">
+      {data.projects.map((project, index) => (
+        <div
+          key={index}
+          className="relative pl-6 border-l"
+          style={{ borderLeftColor: accentColor }}
+        >
+          <div className="flex justify-between items-start">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                {project.name}
+              </h3>
+
+              {project.technologies && (
+                <p className="text-sm mt-1" style={{ color: accentColor }}>
+                  {project.technologies}
+                </p>
+              )}
+            </div>
+
+            {(project.start_date || project.end_date) && (
+              <span className="text-sm text-gray-500">
+                {formatDate(project.start_date)} -{" "}
+                {project.end_date
+                  ? formatDate(project.end_date)
+                  : "Present"}
+              </span>
+            )}
+          </div>
+
+          {project.description && (
+            <p className="text-gray-700 text-sm mt-3">
+              {project.description}
+            </p>
+          )}
+
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm underline mt-2 inline-block"
+              style={{ color: accentColor }}
+            >
+              View Project
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+
+
+
+				{/* {data.projects && data.projects.length > 0 && (
 					<section className="mb-8">
-						<h2 className="text-2xl font-light mb-4 pb-2 border-b border-gray-200">
+						<h2 className="text-2xl font-light mb-6 pb-2 border-b border-gray-200">
 							Projects
 						</h2>
 
 						<div className="space-y-6">
-							{data.project.map((p, index) => (
+							{data.projects.map((project, index) => (
 								<div key={index} className="relative pl-6 border-l border-gray-200" style={{borderLeftColor: accentColor}}>
 
 
 									<div className="flex justify-between items-start">
 										<div>
-											<h3 className="text-lg font-medium text-gray-900">{p.name}</h3>
+											<h3 className="text-lg font-semibold text-gray-900">{project.name}</h3>
 										</div>
 									</div>
-									{p.description && (
+									{project.description && (
 										<div className="text-gray-700 leading-relaxed text-sm mt-3">
-											{p.description}
+											{project.description}
 										</div>
 									)}
 								</div>
 							))}
 						</div>
 					</section>
-				)}
+				)} */}
 
-				<div className="grid sm:grid-cols-2 gap-8">
+				<div className="space-y-8">
 					{/* Education */}
 					{data.education && data.education.length > 0 && (
 						<section>
@@ -138,8 +203,7 @@ const ModernTemplate = ({ data, accentColor }) => {
 										</h3>
 										<p style={{ color: accentColor }}>{edu.institution}</p>
 										<div className="flex justify-between items-center text-sm text-gray-600">
-											<span>{formatDate(edu.graduation_date)}</span>
-											{edu.gpa && <span>GPA: {edu.gpa}</span>}
+											<span>{formatDate(edu.start_date)} - {edu.is_current ? "Present" : formatDate(edu.end_date)}</span>
 										</div>
 									</div>
 								))}
