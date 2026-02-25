@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ useEffect(() => {
 
   if (token) {
     localStorage.setItem("token", token);
+    toast.success("Login successful");
     navigate("/app");
   }
 }, [navigate]);
@@ -41,12 +43,20 @@ useEffect(() => {
   const data = await res.json();
 
   if (!res.ok) {
-    alert(data.message);
+    toast.error(data.message);
     return;
   }
 
   localStorage.setItem("token", data.token);
+  toast.success("Login successful 🎉");
+
+  setTimeout(() => {
   window.location.href = "/app";
+  }, 1000);
+
+
+  // localStorage.setItem("token", data.token);
+  // window.location.href = "/app";
 };
 
   const handleChange = (e) => {

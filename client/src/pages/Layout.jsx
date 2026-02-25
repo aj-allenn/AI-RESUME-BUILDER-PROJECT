@@ -1,15 +1,23 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify';
 
 const Layout = () => {
   
-    const user={name:"Allen"};
+    const user={name:"allen"};
 
     const navigate = useNavigate()
 
     const logoutUser= ()=>{
-        navigate ('/')
-    }
+      localStorage.removeItem("token");
+      toast.success("Logged out successfully 👋");
+
+      setTimeout(() => {
+      navigate("/");
+      }, 1000);
+
+        // navigate ('/')
+    };
     
   return (
     <div className="min-h-screen bg-gray-50">
