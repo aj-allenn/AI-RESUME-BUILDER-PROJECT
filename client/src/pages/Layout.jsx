@@ -10,13 +10,13 @@ const Layout = () => {
 
     const logoutUser= ()=>{
       localStorage.removeItem("token");
-      toast.success("Logged out successfully 👋");
+      toast.success("Logged out successfully ");
 
       setTimeout(() => {
       navigate("/");
       }, 1000);
 
-        // navigate ('/')
+
     };
     
   return (

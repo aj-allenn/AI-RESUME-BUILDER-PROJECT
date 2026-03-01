@@ -20,10 +20,10 @@ const Preview = () => {
           title: data.title || '',
           personal_info: data.personal_info || {},
           professional_summary: data.professional_summary || '',
-          experience: data.experience || [],
-          education: data.education || [],
-          projects: data.projects || [],
           skills: data.skills || [],
+          experience: data.experience || [],
+          projects: data.projects || [],
+          education: data.education || [],
           template: data.template || 'modern',
           accent_color: data.accent_color || '#038079',
         })

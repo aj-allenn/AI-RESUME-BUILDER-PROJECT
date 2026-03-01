@@ -1,17 +1,24 @@
 
-import { PlusIcon, Upload, UploadCloudIcon, XIcon, FileText, Trash2, Edit, Eye } from 'lucide-react'
+import { PlusIcon, Upload, UploadCloudIcon, XIcon, FileText, Trash2, Edit, Eye, LoaderCircleIcon } from 'lucide-react'
 import React, { useState, useEffect } from 'react';
-import {useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+// import {useSelector} from 'react-redux';
 
 const Dashboard = () => {
+
+  // const {user,token} = useSelctor(state => state.auth)
 
   const [showCreateResume,setshowCreateResume]=useState(false)
   const [showUploadResume,setshowUploadResume]=useState(false)
   const [title,setTitle] = useState("")
   const [resume,setResume] = useState(null)
   const [resumes, setResumes] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
+
+
+  
 
   const navigate= useNavigate()
 
@@ -83,7 +90,7 @@ const Dashboard = () => {
         setTitle("");
         navigate(`/app/builder/${data._id}`);
       } else {
-        alert('Failed to create resume');
+        toast.error('Failed to create resume');
       }
     } catch (error) {
       console.error("Error creating resume:", error);
@@ -106,7 +113,7 @@ const Dashboard = () => {
       if (res.ok) {
         loadResumes();
       } else {
-        alert('Failed to delete resume');
+        toast.error('Failed to delete resume');
       }
     } catch (error) {
       console.error("Error deleting resume:", error);
@@ -114,12 +121,50 @@ const Dashboard = () => {
     }
   };
 
-  const uploadResume = async (event)=>{
-    event.preventDefault()
-    // TODO: Implement PDF upload and parsing
-    alert('PDF upload feature coming soon!');
-    setshowUploadResume(false)
+  const uploadResume = async (event) => {
+  event.preventDefault()
+  setLoading(true)
+
+  if (!resume) {
+    toast.error("Please select a PDF file");
+    return;
   }
+
+  try {
+    const token = localStorage.getItem("token");
+    // const resumeText= await pdfToText(resume)
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("resume", resume);
+
+    const res = await fetch("http://localhost:5000/api/resumes/uploads", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      toast.success("Resume uploaded successfully!");
+      setshowUploadResume(false);
+      setTitle("");
+      setResume(null);
+      loadResumes();
+      navigate(`/app/builder/${data._id}`);
+    } else {
+      toast.error("Upload failed");
+    }
+  } catch (error) {
+    console.error("Upload error:", error);
+    toast.error("Error uploading resume");
+  }
+};
+
+useEffect(()=>{
+loadResumes()
+},[])
 
 
   return (
@@ -269,7 +314,11 @@ const Dashboard = () => {
 
             </div>
 
-            <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>Upload Resume</button>
+            <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>
+              {loading && <LoaderCircleIcon className='animate-spin size-4 text-white'/>}
+            
+              Upload Resume
+              </button>
             <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors'
             onClick={()=>{
               setshowUploadResume(false); setTitle('')

@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useCallback } from "react";
+import { toast } from "react-toastify";
 import Navbar from "../components/home/Navbar";
 import { ArrowLeftIcon,Briefcase,FolderIcon,GraduationCap,User,FileText,Sparkles, ChevronLeft, ChevronRight, Save, Download } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -19,6 +20,8 @@ const Builder = () => {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  const [isDirty, setIsDirty] = useState(false);
+
    const [resumeData,setResumeData]=useState(
     {
       _id:'',
@@ -29,7 +32,7 @@ const Builder = () => {
       education:[],
       projects:[],
       skills:[],
-      template:'modern',
+      template:'classic',
       public:false,
       accent_color:'#038079'
 
@@ -38,6 +41,13 @@ const Builder = () => {
 
    const [activeSectionIndex, setActiveSectionIndex]= useState(0)
    const [removeBackground,setRemoveBackground]=useState(false);
+
+
+    const updateField = (field, value) => {
+    setResumeData(prev => ({ ...prev, [field]: value }));
+    setIsDirty(true);
+  };
+   
 
    const loadResume = useCallback(async () => {
      setLoading(true);
@@ -63,6 +73,10 @@ const Builder = () => {
            public: data.public || false,
            accent_color: data.accent_color || '#038079',
          });
+
+          setIsDirty(false);
+
+
        }
      } catch (error) {
        console.error("Error loading resume:", error);
@@ -103,13 +117,16 @@ const Builder = () => {
            navigate(`/app/builder/${data._id}`);
            setResumeData(prev => ({ ...prev, _id: data._id }));
          }
-         alert('Resume saved successfully!');
+
+         setIsDirty(false);
+
+         toast.success('Resume saved successfully!');
        } else {
-         alert('Failed to save resume');
+         toast.error('Failed to save resume');
        }
      } catch (error) {
        console.error("Error saving resume:", error);
-       alert('Error saving resume');
+       toast.error('Error saving resume');
      } finally {
        setSaving(false);
      }
@@ -122,15 +139,23 @@ const Builder = () => {
    const sections=[
     {id:"personal",name:"Personal Info", icon:User },
     {id:"summary",name:"Summary", icon:FileText },
-    {id:"experience",name:"Experience", icon:Briefcase },
-    {id:"education",name:"Education", icon:GraduationCap },
-    {id:"projects",name:"Projects", icon:FolderIcon },
     {id:"skills",name:"Skills", icon:Sparkles },
+    {id:"experience",name:"Experience", icon:Briefcase },
+    {id:"projects",name:"Projects", icon:FolderIcon },
+    {id:"education",name:"Education", icon:GraduationCap },
    ]
 
 
    const activeSection = sections[activeSectionIndex]
 
+
+  if (loading && resumeId && resumeId !== "new") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">Loading resume...</p>
+      </div>
+    );
+  }
 
   return (
    <div>
@@ -166,8 +191,8 @@ const Builder = () => {
               {/* left-left */}
 
               <div className="flex items-center gap-2">
-                 <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=> setResumeData(prev=> ({...prev,template}))}/>
-                  <ColorPicker selectedColor={resumeData.accent_color} onChange={(color)=>setResumeData(prev =>({...prev,accent_color:color}))}/>
+                 <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=> updateField("template",template)}/>
+                  <ColorPicker selectedColor={resumeData.accent_color} onChange={(color)=>updateField("accent_color",color)}/>
               </div>
 
 
@@ -194,28 +219,29 @@ const Builder = () => {
 
             <div className="space-y-6">
               {activeSection.id === 'personal' && (
-                <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>setResumeData(prev => ({...prev, personal_info:data}))} removeBackground={removeBackground}
+                <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>updateField("personal_info",data)} removeBackground={removeBackground}
                 setRemoveBackground={setRemoveBackground}/>
               )}
 
               {activeSection.id === 'summary' && (
-                <Summary data={resumeData.professional_summary} onChange={(data)=> setResumeData(prev=>({...prev, professional_summary: data}))} resumeData={resumeData}/>
-              )}
-              
-              {activeSection.id === 'experience' && (
-                <Experience data={resumeData.experience} onChange={(data)=> setResumeData(prev=>({...prev, experience: data}))}/>
-              )}
-
-              {activeSection.id === 'education' && (
-                <Education data={resumeData.education} onChange={(data)=> setResumeData(prev=>({...prev, education: data}))}/>
-              )}
-
-              {activeSection.id === 'projects' && (
-                <Projects data={resumeData.projects} onChange={(data)=> setResumeData(prev=>({...prev, projects: data}))}/>
+                <Summary data={resumeData.professional_summary} onChange={(data)=> updateField("professional_summary",data)} resumeData={resumeData}/>
               )}
 
               {activeSection.id === 'skills' && (
-                <Skills data={resumeData.skills} onChange={(data)=> setResumeData(prev=>({...prev, skills: data}))}/>
+                <Skills data={resumeData.skills} onChange={(data)=> setResumeData("skills", data)}/>
+              )}
+              
+              {activeSection.id === 'experience' && (
+                <Experience data={resumeData.experience} onChange={(data)=> updateField("experience",data)}/>
+              )}
+
+
+              {activeSection.id === 'projects' && (
+                <Projects data={resumeData.projects} onChange={(data)=> updateField("projects",data)}/>
+              )}
+
+              {activeSection.id === 'education' && (
+                <Education data={resumeData.education} onChange={(data)=> updateField("education",data)}/>
               )}
 
             </div>
@@ -236,13 +262,19 @@ const Builder = () => {
               <Download className="size-4" />
               Export PDF
             </button>
+
             <button
               onClick={saveResume}
               disabled={saving || loading}
               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Save className="size-4" />
-              {saving ? 'Saving...' : 'Save Resume'}
+              {/* <Save className="size-4" />
+              {saving ? 'Saving...' : 'Save Resume'} */}
+               <Save className="size-4" />
+              {saving ? 'Saving...' 
+                : resumeData._id && isDirty 
+                    ? 'Save Changes' 
+                    : 'Save Resume'}
             </button>
           </div>
 
