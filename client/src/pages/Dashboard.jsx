@@ -167,172 +167,363 @@ loadResumes()
 },[])
 
 
-  return (
-    <div>
-        <div className='max-w-7xl mx-auto px-4 py-8'>
-        <p className='text-2xl font-medium m-6 bg-gradient-to-r from-slate-600 to-slate-700 bg-clip-text text-transparent sm:hidden'>
-          Welcome, {user?.name || 'User'}
-        </p>
+  // return (
+  //   <div>
+  //       <div className='max-w-7xl mx-auto px-4 py-8'>
+  //       <p className='text-2xl font-medium m-6 bg-gradient-to-r from-slate-600 to-slate-700 bg-clip-text text-transparent sm:hidden'>
+  //         Welcome, {user?.name || 'User'}
+  //       </p>
 
-        <div className='flex gap-4'>
+  //       <div className='flex gap-4'>
 
-            {/* button-1*/}
-            <button onClick={()=>setshowCreateResume(true)} className='w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2
-             text-slate-600 border border-dashed border-slate-300 group hover:border-indigo-500 hover:shadow-lg transition-all
-              duration-300 cursor-pointer'>
-                <PlusIcon className='size-11 transition-all duration-300 p-2.5 bg-gradient-to-br from-indigo-300 to-indigo-500 text-white rounded-full'/>
-                <p className='text-sm group-hover:text-indigo-600
-                 transition-all duration-300'>Create Resume</p>
-            </button>
+  //           {/* button-1*/}
+  //           <button onClick={()=>setshowCreateResume(true)} className='w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2
+  //            text-slate-600 border border-dashed border-slate-300 group hover:border-indigo-500 hover:shadow-lg transition-all
+  //             duration-300 cursor-pointer'>
+  //               <PlusIcon className='size-11 transition-all duration-300 p-2.5 bg-gradient-to-br from-indigo-300 to-indigo-500 text-white rounded-full'/>
+  //               <p className='text-sm group-hover:text-indigo-600
+  //                transition-all duration-300'>Create Resume</p>
+  //           </button>
 
 
-             <button onClick={()=>setshowUploadResume(true)} className='w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2
-             text-slate-600 border border-dashed border-slate-300 group hover:border-violet-500 hover:shadow-lg transition-all
-              duration-300 cursor-pointer'>
-                <UploadCloudIcon className='size-11 transition-all duration-300 p-2.5 bg-gradient-to-br from-indigo-300 to-violet-700 text-white rounded-full'/>
-                <p className='text-sm group-hover:text-violet-600
-                 transition-all duration-300'>Upload Existing</p>
-            </button>
+  //            <button onClick={()=>setshowUploadResume(true)} className='w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2
+  //            text-slate-600 border border-dashed border-slate-300 group hover:border-violet-500 hover:shadow-lg transition-all
+  //             duration-300 cursor-pointer'>
+  //               <UploadCloudIcon className='size-11 transition-all duration-300 p-2.5 bg-gradient-to-br from-indigo-300 to-violet-700 text-white rounded-full'/>
+  //               <p className='text-sm group-hover:text-violet-600
+  //                transition-all duration-300'>Upload Existing</p>
+  //           </button>
+  //       </div>
+
+
+
+  //       <hr className='border-slate-500 my-6 sm:w-[305px]'/>
+
+  //       {/* Existing Resumes */}
+  //       <div className="mt-8">
+  //         <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Resumes</h2>
+  //         {loading ? (
+  //           <p className="text-gray-500">Loading resumes...</p>
+  //         ) : resumes.length === 0 ? (
+  //           <p className="text-gray-500">No resumes yet. Create your first resume above!</p>
+  //         ) : (
+  //           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  //             {resumes.map((resume) => (
+  //               <div
+  //                 key={resume._id}
+  //                 className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+  //               >
+  //                 <div className="flex items-start justify-between mb-3">
+  //                   <div className="flex items-center gap-2">
+  //                     <FileText className="size-5 text-indigo-600" />
+  //                     <h3 className="font-semibold text-gray-800">{resume.title || 'Untitled Resume'}</h3>
+  //                   </div>
+  //                 </div>
+  //                 <p className="text-sm text-gray-500 mb-4">
+  //                   Updated {new Date(resume.updatedAt).toLocaleDateString()}
+  //                 </p>
+  //                 <div className="flex gap-2">
+  //                   <button
+  //                     onClick={() => navigate(`/app/builder/${resume._id}`)}
+  //                     className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors text-sm"
+  //                   >
+  //                     <Edit className="size-4" />
+  //                     Edit
+  //                   </button>
+  //                   <button
+  //                     onClick={() => navigate(`/view/${resume._id}`)}
+  //                     className="flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm"
+  //                   >
+  //                     <Eye className="size-4" />
+  //                   </button>
+  //                   <button
+  //                     onClick={() => deleteResume(resume._id)}
+  //                     className="flex items-center justify-center gap-2 px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm"
+  //                   >
+  //                     <Trash2 className="size-4" />
+  //                   </button>
+  //                 </div>
+  //               </div>
+  //             ))}
+  //           </div>
+  //         )}
+  //       </div>
+
+
+  //      {showCreateResume && (
+  //       <form onSubmit={createResume} onClick={()=>{setshowCreateResume(false)}} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
+         
+  //        <div onClick={e=> e.stopPropagation()} className='relative bg-slate-50 border shadoow-md rounded-lg w-full max-w-sm p-6'>
+  //           <h2 className='text-xl font-bold mb-4'>Create a resume</h2>
+  //           <input 
+  //             type="text" 
+  //             value={title}
+  //             onChange={(e)=>setTitle(e.target.value)}
+  //             placeholder='enter resume title' 
+  //             className='w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:border-violet-600 focus:ring-violet-600 outline-none' 
+  //             required 
+  //           />
+
+  //           <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>Create Resume</button>
+
+  //           <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors'
+  //           onClick={()=>{
+  //             setshowCreateResume(false); setTitle('')
+  //           }}/>
+  //        </div>
+  //       </form>
+  //      )
+
+  //      }
+
+
+  //      {showUploadResume && (
+
+  //       <form onSubmit={uploadResume} onClick={()=>{setshowUploadResume(false)}} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
+         
+  //        <div onClick={e=> e.stopPropagation()} className='relative bg-slate-50 border shadoow-md rounded-lg w-full max-w-sm p-6'>
+  //           <h2 className='text-xl font-bold mb-4'>Upload resume</h2>
+  //           <input onChange={(e)=>setTitle(e.target.value)} value={title} type="text" placeholder='enter resume title' className='w-full px-4 py-2 mb-4 focus:border-violet-600 ring-violet-600' required />
+
+
+
+  //           <div>
+  //             <label htmlFor="resume-input" className='block text-sm
+  //              text-slate-700'> 
+  //              Select resume file
+  //              <div className='flex flex-col items-center justify-center gap-2 
+  //              border group text-slate-400 border-slate-400 border-dashed rounded-md p-4 py-10 my-4 hover:text-violet-700 cursor-pointer transition-colors'>
+
+  //               { resume ? (
+  //                 <p className='text-indigo-700'>{resume.name}</p>
+  //               ):(
+  //                 <>
+  //                 <UploadCloudIcon className='size-14 stroke-1' />
+  //                 <p>Upload resume</p>
+  //                   </>
+  //               )}
+
+  //              </div>
+  //             </label>
+
+  //             {/* resume-input */}
+
+  //             <input type="file" id='resume-input' accept='.pdf'hidden
+  //             onChange={(e)=>setResume(e.target.files[0])}  />
+            
+
+  //           </div>
+
+  //           <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>
+  //             {loading && <LoaderCircleIcon className='animate-spin size-4 text-white'/>}
+            
+  //             Upload Resume
+  //             </button>
+  //           <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors'
+  //           onClick={()=>{
+  //             setshowUploadResume(false); setTitle('')
+  //           }}/>
+
+  //           </div>
+  //           </form>
+  //      )
+
+  //      }
+
+  //       </div>
+  //   </div>
+  // )
+
+return (
+    <div className="min-h-screen bg-gray-50 flex">
+
+      {/* SIDEBAR */}
+      <div className="hidden md:flex w-64 bg-white border-r border-gray-200 flex-col p-6">
+        <h1 className="text-xl font-bold text-gray-800 mb-10">
+          Dashboard
+        </h1>
+
+        <div className="space-y-4 text-sm text-gray-600">
+          <div>Total Resumes: {resumes.length}</div>
+          <div>User: {user?.name || "User"}</div>
         </div>
 
+        <div className="mt-auto text-xs text-gray-400">
+          © 2026 Resume Builder
+        </div>
+      </div>
 
+      {/* MAIN */}
+      <div className="flex-1 p-8">
 
-        <hr className='border-slate-500 my-6 sm:w-[305px]'/>
+        {/* HEADER */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Welcome, {user?.name || "User"}
+          </h2>
+          <p className="text-gray-500 text-sm mt-1">
+            Manage your resumes and build new ones
+          </p>
+        </div>
 
-        {/* Existing Resumes */}
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Resumes</h2>
-          {loading ? (
-            <p className="text-gray-500">Loading resumes...</p>
-          ) : resumes.length === 0 ? (
-            <p className="text-gray-500">No resumes yet. Create your first resume above!</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {resumes.map((resume) => (
-                <div
-                  key={resume._id}
-                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <FileText className="size-5 text-indigo-600" />
-                      <h3 className="font-semibold text-gray-800">{resume.title || 'Untitled Resume'}</h3>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Updated {new Date(resume.updatedAt).toLocaleDateString()}
-                  </p>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => navigate(`/app/builder/${resume._id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors text-sm"
-                    >
-                      <Edit className="size-4" />
-                      Edit
-                    </button>
+        {/* ACTION BAR */}
+        <div className="flex gap-4 mb-10">
+          <button
+            onClick={() => setshowCreateResume(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-violet-500 text-white rounded-xl hover:bg-violet-700 transition"
+          >
+            <PlusIcon className="size-4" />
+            Create Resume
+          </button>
+
+          <button
+            onClick={() => setshowUploadResume(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-violet-500 text-white border border-gray-300 rounded-xl hover:bg-violet-700 transition"
+          >
+            <UploadCloudIcon className="size-4" />
+            Upload Resume
+          </button>
+        </div>
+
+        {/* RESUME GRID */}
+        {loading ? (
+          <p className="text-gray-500">Loading resumes...</p>
+        ) : resumes.length === 0 ? (
+          <div className="bg-white border border-dashed border-gray-300 rounded-xl p-12 text-center text-gray-500">
+            No resumes yet. Start by creating one.
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resumes.map((resume) => (
+              <div
+                key={resume._id}
+                className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition"
+              >
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {resume.title || "Untitled Resume"}
+                </h3>
+
+                <p className="text-xs text-gray-500 mb-6">
+                  Updated {new Date(resume.updatedAt).toLocaleDateString()}
+                </p>
+
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={() => navigate(`/app/builder/${resume._id}`)}
+                    className="text-sm text-indigo-600 hover:underline flex items-center gap-1"
+                  >
+                    <Edit className="size-4" />
+                    Edit
+                  </button>
+
+                  <div className="flex gap-3">
                     <button
                       onClick={() => navigate(`/view/${resume._id}`)}
-                      className="flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm"
+                      className="text-gray-500 hover:text-gray-700"
                     >
                       <Eye className="size-4" />
                     </button>
+
                     <button
                       onClick={() => deleteResume(resume._id)}
-                      className="flex items-center justify-center gap-2 px-3 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm"
+                      className="text-red-500 hover:text-red-700"
                     >
                       <Trash2 className="size-4" />
                     </button>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* CREATE MODAL */}
+        {showCreateResume && (
+          <form
+            onSubmit={createResume}
+            onClick={() => setshowCreateResume(false)}
+            className="fixed inset-0 bg-black/60 flex items-center justify-center"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-xl w-full max-w-md p-8"
+            >
+              <h2 className="text-lg font-semibold mb-6">
+                Create Resume
+              </h2>
+
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter resume title"
+                className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg"
+                required
+              />
+
+              <button className="w-full py-3 bg-violet-600 text-white rounded-lg border border-violet-600 hover:bg-violet-700 transition">
+                Create Resume
+              </button>
             </div>
-          )}
-        </div>
+          </form>
+        )}
 
+        {/* UPLOAD MODAL */}
+        {showUploadResume && (
+          <form
+            onSubmit={uploadResume}
+            onClick={() => setshowUploadResume(false)}
+            className="fixed inset-0 bg-violet-500 flex items-center justify-center"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-xl w-full max-w-md p-8"
+            >
+              <h2 className="text-lg font-semibold mb-6">
+                Upload Resume
+              </h2>
 
-       {showCreateResume && (
-        <form onSubmit={createResume} onClick={()=>{setshowCreateResume(false)}} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
-         
-         <div onClick={e=> e.stopPropagation()} className='relative bg-slate-50 border shadoow-md rounded-lg w-full max-w-sm p-6'>
-            <h2 className='text-xl font-bold mb-4'>Create a resume</h2>
-            <input 
-              type="text" 
-              value={title}
-              onChange={(e)=>setTitle(e.target.value)}
-              placeholder='enter resume title' 
-              className='w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:border-violet-600 focus:ring-violet-600 outline-none' 
-              required 
-            />
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                type="text"
+                placeholder="Enter resume title"
+                className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg"
+                required
+              />
 
-            <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>Create Resume</button>
-
-            <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors'
-            onClick={()=>{
-              setshowCreateResume(false); setTitle('')
-            }}/>
-         </div>
-        </form>
-       )
-
-       }
-
-
-       {showUploadResume && (
-
-        <form onSubmit={uploadResume} onClick={()=>{setshowUploadResume(false)}} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
-         
-         <div onClick={e=> e.stopPropagation()} className='relative bg-slate-50 border shadoow-md rounded-lg w-full max-w-sm p-6'>
-            <h2 className='text-xl font-bold mb-4'>Upload resume</h2>
-            <input onChange={(e)=>setTitle(e.target.value)} value={title} type="text" placeholder='enter resume title' className='w-full px-4 py-2 mb-4 focus:border-violet-600 ring-violet-600' required />
-
-
-
-            <div>
-              <label htmlFor="resume-input" className='block text-sm
-               text-slate-700'> 
-               Select resume file
-               <div className='flex flex-col items-center justify-center gap-2 
-               border group text-slate-400 border-slate-400 border-dashed rounded-md p-4 py-10 my-4 hover:text-violet-700 cursor-pointer transition-colors'>
-
-                { resume ? (
-                  <p className='text-indigo-700'>{resume.name}</p>
-                ):(
-                  <>
-                  <UploadCloudIcon className='size-14 stroke-1' />
-                  <p>Upload resume</p>
-                    </>
-                )}
-
-               </div>
+              <label htmlFor="resume-input">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer">
+                  {resume ? (
+                    <p>{resume.name}</p>
+                  ) : (
+                    <p className="text-gray-500 text-sm">
+                      Click to upload PDF
+                    </p>
+                  )}
+                </div>
               </label>
 
-              {/* resume-input */}
+              <input
+                type="file"
+                id="resume-input"
+                accept=".pdf"
+                hidden
+                onChange={(e) => setResume(e.target.files[0])}
+              />
 
-              <input type="file" id='resume-input' accept='.pdf'hidden
-              onChange={(e)=>setResume(e.target.files[0])}  />
-            
-
-            </div>
-
-            <button className='w-full py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors'>
-              {loading && <LoaderCircleIcon className='animate-spin size-4 text-white'/>}
-            
-              Upload Resume
+              <button className="w-full mt-6 py-3 bg-black text-white rounded-lg flex items-center justify-center gap-2">
+                {loading && <LoaderCircleIcon className='animate-spin size-4' />}
+                Upload Resume
               </button>
-            <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors'
-            onClick={()=>{
-              setshowUploadResume(false); setTitle('')
-            }}/>
-
             </div>
-            </form>
-       )
+          </form>
+        )}
 
-       }
-
-        </div>
+      </div>
     </div>
   )
+  
 }
 
 export default Dashboard
