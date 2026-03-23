@@ -11,7 +11,7 @@ const ModernTemplate = ({ data, accentColor }) => {
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto bg-white text-gray-800 shadow-llg">
+		<div className="max-w-4xl mx-auto bg-white text-gray-800 shadow-lg">
 			{/* Header */}
 			<header className=" p-8 text-white " style={{ backgroundColor: accentColor }}>
 				<h1 className="max-w-4xl text-4xl font-light mb-3">

@@ -65,127 +65,123 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white text-blackrelative overflow-hidden px-4">
+      {/* Subtle animated blobs */}
+      
+
       <form
         onSubmit={handleSubmit}
-        className="w-[380px] h-md max-w-md bg-white rounded-2xl shadow-2xl px-3 py-3"
+        className="w-[420px] max-w-full bg-white shadow-2xl rounded-[2rem] p-8 md:p-10 relative z-10 box-border transition-all duration-300 hover:shadow-2xl"
       >
         {/* Header */}
-        <h1 className="text-3xl font-semibold text-gray-800 text-center">
-          {state === "login" ? "Welcome Back " : "Create Account "}
-        </h1>
-        <p className="text-gray-500 text-center mt-2">
-          {state === "login"
-            ? "Login to continue"
-            : "Sign up to get started"}
-        </p>
+        <div className="mb-8 text-center">
+           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-100/50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-5 shadow-inner">
+             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+           </div>
+           <h1 className="text-3xl font-bold text-black tracking-tight">
+             {state === "login" ? "Welcome Back" : "Create Account"}
+           </h1>
+           <p className="text-gray-600 mt-2 font-medium text-sm">
+             {state === "login"
+               ? "Login to continue building"
+               : "Sign up to get started"}
+           </p>
+        </div>
 
-        {/* Name */}
-        {state !== "login" && (
-          <div className="mt-2">
-            <label className="text-sm text-gray-600">Name</label>
+        <div className="space-y-4">
+          {/* Name */}
+          {state !== "login" && (
+            <div>
+              <label className="block text-sm font-semibold text-black mb-1.5 ml-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3800/60 border bg-white border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400 "
+              />
+            </div>
+          )}
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1.5 ml-1">Email</label>
             <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              value={formData.name}
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-1 py-1.5 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400"
             />
           </div>
-        )}
 
-        {/* Email */}
-        <div className="mt-4">
-          <label className="text-sm text-gray-600">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="you@example.com"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-1 py-1.5 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-          />
-        </div>
-
-        {/* Password */}
-        <div className="mt-4">
-          <label className="text-sm text-gray-600">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="w-full px-1 py-1.5 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-          />
-        </div>
-
-        {/* Forgot */}
-        {state === "login" && (
-          <div className="text-right mt-2">
-            <button
-              type="reset"
-              className="text-sm text-indigo-500 hover:underline"
-            >
-              Forgot password?
-            </button>
+          {/* Password */}
+          <div>
+            <div className="flex justify-between items-center mb-1.5 ml-1">
+              <label className="block text-sm font-semibold text-slate-700">Password</label>
+              {state === "login" && (
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors"
+                >
+                  {/* Forgot password? */}
+                </button>
+              )}
+            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400"
+            />
           </div>
-        )}
-
-
-        {/* {OR} */}
-
-        <div className="flex items-center my-3"> 
-          <div className="flex-grow border-t"></div>
-            <span className="mx-3 text-sm text-gray-500">OR</span>
-            <div className="flex-grow border-t"></div>
         </div>
 
-       
-        {/* Google Login */}
-        <a
-          href="http://localhost:5000/auth/google"
-          className="flex items-center justify-center gap-3 w-full border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition"
-        >
-          <img
-            src="https://developers.google.com/identity/images/g-logo.png"
-            alt="Google"
-            className="w-4 h-4"
-          />
-          <span className="font-medium">Continue with Google</span>
-        </a>
-     
-
-     <a
-        href="http://localhost:5000/auth/github"
-        className="flex items-center justify-center gap-3 w-full mt-2 border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition"
-      >
-       <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="w-4 h-4"
-       >
-       <path d="M12 0C5.37 0 0 5.48 0 12.24c0 5.41 3.44 9.99 8.21 11.61.6.12.82-.26.82-.58v-2.04c-3.34.74-4.04-1.65-4.04-1.65-.55-1.42-1.34-1.8-1.34-1.8-1.09-.76.08-.75.08-.75 1.2.09 1.83 1.27 1.83 1.27 1.07 1.87 2.81 1.33 3.5 1.02.11-.8.42-1.33.76-1.64-2.66-.31-5.47-1.36-5.47-6.06 0-1.34.46-2.44 1.23-3.3-.12-.31-.54-1.57.12-3.27 0 0 1-.33 3.3 1.26a11.18 11.18 0 0 1 6 0c2.3-1.59 3.3-1.26 3.3-1.26.66 1.7.24 2.96.12 3.27.77.86 1.23 1.96 1.23 3.3 0 4.71-2.82 5.75-5.5 6.05.43.38.82 1.12.82 2.26v3.35c0 .32.22.7.82.58C20.56 22.23 24 17.65 24 12.24 24 5.48 18.63 0 12 0z" />
-      </svg>
-      <span className="font-medium">Continue with GitHub</span>
-     </a>
-
-
-
-     {/* Submit */}
+        {/* Submit */}
         <button
           type="submit"
-          className="w-full mt-4 bg-indigo-500 text-white py-2 rounded-lg font-medium hover:bg-indigo-600 transition"
+          className="w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-white py-3.5 rounded-xl font-semibold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] transition-all active:scale-[0.98] active:shadow-none"
         >
-          {state === "login" ? "Login" : "Sign Up"}
+          {state === "login" ? "Sign In" : "Create Account"}
         </button>
 
+        {/* Separator */}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-200/80 dark:border-slate-700/80"></div>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase font-bold tracking-wider">
+            <span className="px-3 bg-[#e4e7f1] rounded-full text-slate-900 py-0.5">Or continue with</span>
+          </div>
+        </div>
+
+        {/* Social */}
+        <div className="grid grid-cols-2 gap-3">
+          <a
+            href="http://localhost:5000/auth/google"
+            className="flex items-center justify-center gap-2 w-full bg-white/80 border border-slate-200 dark:border-slate-700 py-2.5 rounded-xl hover:bg-white hover:shadow-lg transition-all text-slate-700 font-semibold text-sm group"
+          >
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            Google
+          </a>
+          <a
+             href="http://localhost:5000/auth/github"
+             className="flex items-center justify-center gap-2 w-full bg-slate-900 border border-slate-900 py-2.5 rounded-xl hover:bg-slate-800 hover:shadow-md transition-all text-white font-semibold text-sm group"
+          >
+             <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 group-hover:scale-110 transition-transform"><path d="M12 0C5.37 0 0 5.48 0 12.24c0 5.41 3.44 9.99 8.21 11.61.6.12.82-.26.82-.58v-2.04c-3.34.74-4.04-1.65-4.04-1.65-.55-1.42-1.34-1.8-1.34-1.8-1.09-.76.08-.75.08-.75 1.2.09 1.83 1.27 1.83 1.27 1.07 1.87 2.81 1.33 3.5 1.02.11-.8.42-1.33.76-1.64-2.66-.31-5.47-1.36-5.47-6.06 0-1.34.46-2.44 1.23-3.3-.12-.31-.54-1.57.12-3.27 0 0 1-.33 3.3 1.26a11.18 11.18 0 0 1 6 0c2.3-1.59 3.3-1.26 3.3-1.26.66 1.7.24 2.96.12 3.27.77.86 1.23 1.96 1.23 3.3 0 4.71-2.82 5.75-5.5 6.05.43.38.82 1.12.82 2.26v3.35c0 .32.22.7.82.58C20.56 22.23 24 17.65 24 12.24 24 5.48 18.63 0 12 0z" /></svg>
+             GitHub
+          </a>
+        </div>
+
         {/* Switch */}
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-sm text-slate-600 mt-8 font-medium">
           {state === "login"
             ? "Don't have an account?"
             : "Already have an account?"}{" "}
@@ -193,9 +189,9 @@ useEffect(() => {
             onClick={() =>
               setState((prev) => (prev === "login" ? "register" : "login"))
             }
-            className="text-indigo-600 font-medium cursor-pointer hover:underline"
+            className="text-indigo-600 font-bold cursor-pointer hover:text-indigo-700 hover:underline transition-all"
           >
-            {state === "login" ? "Sign up" : "Login"}
+            {state === "login" ? "Sign up" : "Sign in"}
           </span>
         </p>
       </form>

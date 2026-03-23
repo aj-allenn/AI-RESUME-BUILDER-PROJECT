@@ -30,6 +30,13 @@ const Skills = ({ data, onChange }) => {
           <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900">Skills</h3>
           <p className="text-sm text-gray-500">Add your technical and soft skills</p>
         </div>
+        <button
+          onClick={addSkill}
+          className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
+        >
+          <Plus className="size-4 text-purple-600" />
+          Add
+        </button>
       </div>
 
       <div className="space-y-4">
@@ -42,13 +49,6 @@ const Skills = ({ data, onChange }) => {
             placeholder="Enter a skill and press Enter"
             className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
           />
-          <button
-            onClick={addSkill}
-            className="flex items-center gap-2 px-4 py-2 text-sm bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
-          >
-            <Plus className="size-4 text-purple-600" />
-            Add
-          </button>
         </div>
 
         {data.length === 0 ? (

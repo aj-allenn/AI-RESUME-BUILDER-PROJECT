@@ -1,6 +1,6 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom'
-import Home from './pages/Home';
+import LandingPage from './pages/LandingPage.jsx';
 import Builder from './pages/Builder.jsx';
 import Layout from './pages/Layout';
 import Dashboard from './pages/Dashboard.jsx';
@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Routes>
-       <Route path="/" element={<Home/>} />
+       <Route path="/" element={<LandingPage/>} />
 
        <Route 
        path="/app"

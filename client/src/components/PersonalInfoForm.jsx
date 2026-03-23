@@ -25,16 +25,16 @@ const PersonalInfoForm = ({data,onChange,removeBackground,setRemoveBackground}) 
 
   return (
     <div>
-      <h3 className='text-lg font-semibold text-gray-900'>Personal Information</h3>
-      <p className='text-sm text-gray-600'>Get started with personal information</p>
+      <h3 className='text-lg font-semibold text-gray-900 dark:text-gray-100'>Personal Information</h3>
+      <p className='text-sm text-gray-600 dark:text-gray-400'>Get started with personal information</p>
       <div className='flex items-center gap-2'>
         <label> 
             {data.image ? (
                 <img src={typeof data.image === 'string' ? data.image : URL.createObjectURL(data.image)} alt="user-image" className='w-16 h-16 rounded-full object-cover 
                 mt-5 rinng ring-slate-300 hover:opacity-80' />
             ) : (
-                <div className=' inline-flex items-center gap-2 mt-5 text-slate-600 hover:text-slate-700 cursor-pointer'>
-                    <User className='size-10 p-2.5 border rounded-full'/>
+                <div className=' inline-flex items-center gap-2 mt-5 text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer'>
+                    <User className='size-10 p-2.5 border dark:border-slate-600 rounded-full'/>
                     upload user image
                 </div>
             )}
@@ -43,7 +43,7 @@ const PersonalInfoForm = ({data,onChange,removeBackground,setRemoveBackground}) 
         </label>
           {typeof data.image === 'object' && (
             <div className='flex flex-col gap-1 pl-4 text-sm'>
-                <p>Remove Background</p>
+                <p className="dark:text-slate-300">Remove Background</p>
                 <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                     <input type="checkbox" className='sr-only peer'
                     onChange={()=> setRemoveBackground(prev=> !prev)} 
@@ -64,14 +64,14 @@ const PersonalInfoForm = ({data,onChange,removeBackground,setRemoveBackground}) 
         const Icon = field.icon;
         return(
             <div key={field.key} className='space-y-1 mt-5'>
-                <label className="flex  items-center gap-2 text-sm font-medium text-gray-600">
+                <label className="flex  items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
                     <Icon className="size-4"/>
                     {field.label}
-                    {field.required && <span className='text-red-500'>*</span>}
+                    {field.required && <span className='text-red-500 dark:text-red-400'>*</span>}
                 </label>
                 
                 <input type={field.type} value={data[field.key] || "" } 
-                onChange={(e)=> handleChange(field.key, e.target.value)} className='mt-1 w-full  px-3 py-2 border border-gray-300 rounded-lg focus:ring
+                onChange={(e)=> handleChange(field.key, e.target.value)} className='mt-1 w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring
                 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm' 
                 placeholder={`Enter your ${field.label.toLowerCase()}`} required={field.required} />
 

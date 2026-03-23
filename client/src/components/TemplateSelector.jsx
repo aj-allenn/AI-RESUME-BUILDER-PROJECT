@@ -28,7 +28,7 @@ const TemplateSelector = ({selectedTemplate,onChange}) => {
     ]
   return (
     <div className='relative'>
-      <button onClick={()=> setIsOpen(!isOpen)} className='flex items-center gap-1 text-sm text-blue-600 bg-gradient-to-br from-blue-50 to blue-100 ring-blue-300
+      <button onClick={()=> setIsOpen(!isOpen)} className='flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/40 dark:to-blue-800/40 ring-blue-300 dark:ring-blue-700
       hover:ring transition-all px-3 py-2 rounded-lg'>
         <LayoutIcon size={14}/> <span className='max-sm:hidden'>Template</span>
       </button>
@@ -37,14 +37,14 @@ const TemplateSelector = ({selectedTemplate,onChange}) => {
       {/* available template */}
 
        {isOpen && (
-        <div className='absolute top-full w-xs p-3 mt-2 space-y-3 z-10 bg-white
-        rounded-md border border-gray-200 shadow-sm'>
+        <div className='absolute top-full w-xs p-3 mt-2 space-y-3 z-10 bg-white dark:bg-slate-800
+        rounded-md border border-gray-200 dark:border-slate-700 shadow-sm'>
          {templates.map((template)=>(
             <div key={template.id} onClick={()=>{
                 onChange(template.id);
                 setIsOpen(false)
-            }} className={`relative p-3 border rounded-md cursor-pointer transition-all ${selectedTemplate=== template.id ? "border-blue-600 bg-blue-100" : 
-                "border-gray-300 hover:border-gray-400 hover:bg-gray-100"
+            }} className={`relative p-3 border rounded-md cursor-pointer transition-all ${selectedTemplate=== template.id ? "border-blue-600 dark:border-blue-500 bg-blue-100 dark:bg-blue-900/50" : 
+                "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-100 dark:hover:bg-slate-700/50"
             }`}>
                 {selectedTemplate === template.id &&(
                     <div className='absolute top-2 right-2'>
@@ -55,8 +55,8 @@ const TemplateSelector = ({selectedTemplate,onChange}) => {
                 )}
 
                     <div className='space-y-1'>
-                        <h4 className='font-medium text-gray-800'>{template.name}</h4>
-                        <div className='mt-2 p-2 bg-blue-50 rounded text-xs text-gray-500 italic'>{template.preview}</div>
+                        <h4 className='font-medium text-gray-800 dark:text-gray-200'>{template.name}</h4>
+                        <div className='mt-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded text-xs text-gray-500 dark:text-gray-400 italic'>{template.preview}</div>
                     </div>
 
 

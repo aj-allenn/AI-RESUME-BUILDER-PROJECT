@@ -20,15 +20,15 @@ const ColorPicker = ({selectedColor,onChange}) => {
        const [isOpen,setIsOpen] = useState(false);
   return (
     <div className='relative'>
-        <button onClick={()=>setIsOpen(!isOpen)} className='flex items-center gap-1 text-sm text-purple-600 
-        bg-gradient-to-br from-purple-50 to-purple-100 ring-purple-300
+        <button onClick={()=>setIsOpen(!isOpen)} className='flex items-center gap-1 text-sm text-purple-600 dark:text-purple-400 
+        bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/40 dark:to-purple-800/40 ring-purple-300 dark:ring-purple-700
          hover:ring transition-all px-3 py-2 rounded-lg'>
             <Palette size={13}/> <span className='max-sm:hidden'>Accent</span>
         </button>
 
         {isOpen && (
             <div className='grid grid-cols-4 w-60 gap-2 absolute top-full left-0 
-            right-0 p-3 mt-2 z-10 bg-white rounded-md border border-gray-200 shadow-sm'>
+            right-0 p-3 mt-2 z-10 bg-white dark:bg-slate-800 rounded-md border border-gray-200 dark:border-slate-700 shadow-sm'>
 
                 {colors.map((color)=>(
                     <div key={color.value} className='relative cursor-pointer group flex flex-col' 
@@ -42,7 +42,7 @@ const ColorPicker = ({selectedColor,onChange}) => {
                             </div>
 
                         )}
-                      <p className='text-xs text-center mt-1 text-gray-600'>{color.name}</p>
+                      <p className='text-xs text-center mt-1 text-gray-600 dark:text-gray-400'>{color.name}</p>
                     </div>
                 ))}
             </div>
