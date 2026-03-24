@@ -21,6 +21,9 @@ import { jsPDF } from "jspdf";
 const Builder = () => {
   const { resumeId } = useParams();
   const navigate = useNavigate();
+
+  const API = import.meta.env.VITE_API_URL;
+
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -57,7 +60,7 @@ const Builder = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`https://ai-resume-builder-project-backend.onrender.com/api/resumes/${resumeId}`, {
+      const res = await fetch(`${API}/api/resumes/${resumeId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,8 +106,8 @@ const Builder = () => {
     try {
       const token = localStorage.getItem("token");
       const url = resumeData._id
-        ? `https://ai-resume-builder-project-backend.onrender.com/api/resumes/${resumeData._id}`
-        : 'https://ai-resume-builder-project-backend.onrender.com/api/resumes';
+        ? `${API}/api/resumes/${resumeData._id}`
+        : `${API}/api/resumes`;
 
       const method = resumeData._id ? 'PUT' : 'POST';
 

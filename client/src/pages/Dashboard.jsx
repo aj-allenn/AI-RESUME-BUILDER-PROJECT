@@ -18,7 +18,7 @@ const Dashboard = () => {
   const [user, setUser] = useState(null)
 
 
-
+  const API = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate()
 
@@ -30,7 +30,7 @@ const Dashboard = () => {
   const loadUser = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/auth/me', {
+      const res = await fetch(`${API}/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -51,7 +51,7 @@ const Dashboard = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/resumes', {
+      const res = await fetch(`${API}/api/resumes`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/resumes', {
+      const res = await fetch(`${API}/api/resumes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`https://ai-resume-builder-project-backend.onrender.com/api/resumes/${id}`, {
+      const res = await fetch(`${API}/api/resumes/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -143,7 +143,7 @@ const Dashboard = () => {
       formData.append("title", title);
       formData.append("resume", resume);
 
-      const res = await fetch("https://ai-resume-builder-project-backend.onrender.com/api/resumes/uploads", {
+      const res = await fetch(`${API}/api/resumes/uploads`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

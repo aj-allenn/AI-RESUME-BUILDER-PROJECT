@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 
 const Summary = ({data,onChange,resumeData}) => {
   const [enhancing, setEnhancing] = useState(false);
+   const API = import.meta.env.VITE_API_URL;
 
   const enhanceWithAI = async () => {
     setEnhancing(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/ai/enhance-summary', 
+      const res = await fetch(`${API}/api/ai/enhance-summary`, 
         {
 
         method: 'POST',

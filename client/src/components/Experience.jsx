@@ -1,6 +1,8 @@
 import { Briefcase,Plus,Trash2,Sparkles } from 'lucide-react';
 import React from 'react'
 
+
+const API = import.meta.env.VITE_API_URL;
 const Experience = ({data,onChange}) => {
 
     const addExperience = () =>{
@@ -84,7 +86,7 @@ const Experience = ({data,onChange}) => {
                               onClick={async () => {
                                 try {
                                   const token = localStorage.getItem("token");
-                                  const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/ai/enhance-experience', {
+                                  const res = await fetch(`${API}/api/ai/enhance-experience`, {
                                     method: 'POST',
                                     headers: {
                                       'Content-Type': 'application/json',

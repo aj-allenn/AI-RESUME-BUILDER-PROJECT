@@ -8,10 +8,10 @@ const Preview = () => {
   const [resumeData, setResumeData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
+   const API = import.meta.env.VITE_API_URL;
   const loadResume = useCallback(async () => {
     try {
-      const res = await fetch(`https://ai-resume-builder-project-backend.onrender.com/api/resumes/public/${resumeId}`)
+      const res = await fetch(`${API}/api/resumes/public/${resumeId}`)
       
       if (res.ok) {
         const data = await res.json()
