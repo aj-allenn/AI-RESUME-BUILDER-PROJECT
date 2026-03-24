@@ -123,7 +123,7 @@ async(req,res)=>{
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
-        res.redirect(`http://localhost:5173/login?token=${token}`);
+        res.redirect(`https://ai-resume-builder-project-frontend.onrender.com/login?token=${token}`);
     } catch (error) {
         res.status(500).json({ message: "Server error" });
     }
@@ -146,7 +146,7 @@ router.get(
   async (req, res) => {
     const token = generateToken(req.user._id);
 
-    res.redirect(`http://localhost:5173/login?token=${token}`);
+    res.redirect(`https://ai-resume-builder-project-frontend.onrender.com/login?token=${token}`);
   }
 );
 
@@ -165,7 +165,7 @@ router.post("/forgot-password", async (req, res) => {
 
     await user.save();
 
-    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetUrl = `https://ai-resume-builder-project-frontend.onrender.com/reset-password/${resetToken}`;
 
     nodemailer.createTestAccount((err, account) => {
       if (err) {
