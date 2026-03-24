@@ -47,13 +47,13 @@ const Skills = ({ data, onChange }) => {
             onChange={(e) => setNewSkill(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Enter a skill and press Enter"
-            className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+            className="flex-1 px-3 py-2 text-sm border text-slate-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
           />
         </div>
 
         {data.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            <Sparkles className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+          <div className="text-center py-8 text-slate-500">
+            <Sparkles className="w-12 h-12 mx-auto mb-3 text-slate-300" />
             <p>No skills added yet.</p>
             <p className="text-sm">Add your skills above</p>
           </div>

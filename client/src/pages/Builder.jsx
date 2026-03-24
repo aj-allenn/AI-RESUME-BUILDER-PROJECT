@@ -281,12 +281,12 @@ const Builder = () => {
   }
 
   return (
-    <div className="min-h-screen bg-mesh-light pb-20 overflow-x-hidden">
+    <div className="min-h-screen pb-20 overflow-x-hidden">
       {/* Decorative Workspace Elements */}
-      <div className="fixed top-0 inset-x-0 h-40 bg-gradient-to-b from-indigo-500/5 to-transparent pointer-events-none"></div>
+      <div className="fixed top-0 inset-x-0 h-40 from-indigo-500 to-transparent pointer-events-none"></div>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-6 relative z-10">
-        <Link to={'/app'} className="inline-flex gap-2 items-center px-4 py-2 bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold rounded-xl backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-sm transition-all hover:shadow">
+        <Link to={'/app'} className="inline-flex gap-2 items-center px-4 py-2 bg-white/50 hover:bg-white text-indigo-600 hover:text-indigo-700 font-semibold rounded-xl backdrop-blur-sm border border-slate-200/50 shadow-sm transition-all hover:shadow">
           <ArrowLeftIcon className="size-4" />
           Back to Dashboard
         </Link>
@@ -301,10 +301,10 @@ const Builder = () => {
           {/* left panel */}
 
           <div className="relative lg:col-span-5 xl:col-span-4 rounded-[2rem] overflow-visible z-20 sticky top-6">
-            <div className="glass bg-white/80 dark:bg-slate-800/80 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] border border-white/60 dark:border-slate-700/50 p-6 pt-5">
+            <div className=" bg-white/80 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white/60 p-6 pt-5">
 
               {/* progress bar using activeSectionIndex */}
-              <div className="absolute top-0 left-6 right-6 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-b-full overflow-hidden">
+              <div className="absolute top-0 left-6 right-6 h-1.5 bg-violet-400 rounded-b-full overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-b-full transition-all duration-700 ease-out"
                   style={{ width: `${activeSectionIndex * 100 / (sections.length - 1)}% ` }} />
               </div>
@@ -313,22 +313,22 @@ const Builder = () => {
 
               <div className="flex flex-col gap-4 mb-6 mt-4">
                 {/* Top Controls */}
-                <div className="flex flex-col gap-3 p-4 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-700/50">
+                <div className="flex flex-col gap-3 p-4 bg-slate-50/50 rounded-2xl border border-slate-700">
                   <div className="w-full"><TemplateSelector selectedTemplate={resumeData.template} onChange={(template) => updateField("template", template)} /></div>
                   <div className="w-full flex justify-between items-center">
-                    <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">Accent Color</span>
+                    <span className="text-sm font-semibold text-slate-500">Accent Color</span>
                     <ColorPicker selectedColor={resumeData.accent_color} onChange={(color) => updateField("accent_color", color)} />
                   </div>
                 </div>
 
 
                 {/* Navigation */}
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/50 pb-5 pt-2">
-                  <button onClick={() => setActiveSectionIndex((prevIndex) => Math.max(prevIndex - 1, 0))} className="flex items-center gap-1.5 p-2 bg-white dark:bg-slate-800 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 shadow-sm border border-slate-200 dark:border-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-500/50 hover:shadow-md transition-all disabled:opacity-40 disabled:hover:border-slate-200 dark:disabled:hover:border-slate-600 disabled:hover:text-slate-600 dark:disabled:hover:text-slate-300 disabled:hover:shadow-sm" disabled={activeSectionIndex === 0}>
+                <div className="flex items-center justify-between border-b border-slate-500 pb-5 pt-2">
+                  <button onClick={() => setActiveSectionIndex((prevIndex) => Math.max(prevIndex - 1, 0))} className="flex items-center gap-1.5 p-2 bg-white rounded-xl text-sm font-bold text-slate-700 shadow-sm border border-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 dark:hover:border-indigo-500/50 hover:shadow-md transition-all disabled:opacity-40 disabled:hover:border-slate-200 disabled:hover:text-slate-600 disabled:hover:shadow-sm" disabled={activeSectionIndex === 0}>
                     <ChevronLeft className="size-4" /> Prev
                   </button>
 
-                  <span className="text-sm font-bold text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/20 px-3 py-1 rounded-full">{sections[activeSectionIndex].name}</span>
+                  <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{sections[activeSectionIndex].name}</span>
 
                   <button onClick={() => setActiveSectionIndex((prevIndex) => Math.min(prevIndex + 1, sections.length - 1))} className="flex items-center gap-1.5 p-2 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:bg-indigo-700 hover:shadow-lg transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 disabled:hover:bg-indigo-600 disabled:hover:shadow-[0_4px_14px_0_rgb(79,70,229,0.39)]" disabled={activeSectionIndex === sections.length - 1}>
                     Next
@@ -379,9 +379,9 @@ const Builder = () => {
             <div className="mb-6 flex justify-end gap-3 sticky top-6 z-30">
               <button
                 onClick={exportToPDF}
-                className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold rounded-2xl border border-slate-200/60 dark:border-slate-700 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-[0.98]"
+                className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-slate-200 font-bold rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md hover:bg-indigo-500 transition-all active:scale-[0.98]"
               >
-                <Download className="size-5 text-indigo-500" />
+                <Download className="size-5 text-slate-200" />
                 Export PDF
               </button>
 

@@ -53,16 +53,16 @@ const Navbar = () => {
                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                  </div>
-                 <span className="font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">
+                 <span className="font-extrabold text-2xl tracking-tight text-black dark:text-white">
                     ResumeForge<span className="text-pink-500">.</span>
                  </span>
                </div>
                
                <div className="hidden md:flex space-x-8">
-                 <a href="#features" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 dark:text-slate-300 transition-colors">Features</a>
-                 <a href="#templates" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 dark:text-slate-300 transition-colors">Templates</a>
-                 <a href="#about" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 dark:text-slate-300 transition-colors">About Us</a>
-                 <a href="#contact" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 dark:text-slate-300 transition-colors">Contact</a>
+                 <a href="#features" className="text-sm font-semibold text-slate-700 hover:text-indigo-800 dark:text-slate-200 transition-colors">Features</a>
+                 <a href="#templates" className="text-sm font-semibold text-slate-700 hover:text-indigo-800 dark:text-slate-200 transition-colors">Templates</a>
+                 <a href="#about" className="text-sm font-semibold text-slate-700 hover:text-indigo-800 dark:text-slate-200 transition-colors">About Us</a>
+                 <a href="#contact" className="text-sm font-semibold text-slate-700 hover:text-indigo-800 dark:text-slate-200 transition-colors">Contact</a>
                </div>
                <div className="flex items-center space-x-4 border-l border-slate-200 dark:border-slate-700 pl-4">
                   <Link to={'/login?state=login'} className="text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-indigo-600 transition-colors px-4 py-2 hidden sm:block">

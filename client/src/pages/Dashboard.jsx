@@ -174,12 +174,12 @@ const Dashboard = () => {
 
 
   return (
-    <div className="min-h-screen bg-mesh flex p-4 gap-4 pb-4">
+    <div className="min-h-screen bg-white flex p-4 gap-4 pb-4">
 
       {/* SIDEBAR */}
-      <div className="hidden md:flex w-64 glass rounded-3xl flex-col p-6 shadow-sm border border-white/60 relative overflow-hidden">
+      <div className="hidden md:flex w-64 rounded-3xl flex-col p-6 shadow-sm border border-white/60 relative overflow-hidden">
         {/* Subtle glow behind sidebar content */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-2xl"></div>
 
         <div className="relative z-10">
           <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 mb-10 tracking-tight">
@@ -187,14 +187,14 @@ const Dashboard = () => {
           </h1>
 
           <div className="space-y-6">
-            <div className="p-4 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/50 dark:border-slate-700/50 backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-1">Total Resumes</p>
-              <p className="text-3xl font-bold text-slate-700 dark:text-slate-200">{resumes.length}</p>
+            <div className="p-4 bg-white/40 rounded-2xl border border-white/50 dark:border-slate-700/50 backdrop-blur-sm">
+              <p className="text-xs font-semibold uppercase text-slate-600 tracking-wider mb-1">Total Resumes</p>
+              <p className="text-3xl font-bold text-slate-700">{resumes.length}</p>
             </div>
 
-            <div className="p-4 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/50 dark:border-slate-700/50 backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-1">Account</p>
-              <p className="text-base font-medium text-slate-700 dark:text-slate-200 truncate">{user?.name || "User"}</p>
+            <div className="p-4 bg-white/40 rounded-2xl border border-white/50 dark:border-slate-700/50 backdrop-blur-sm">
+              <p className="text-xs font-semibold uppercase text-slate-500 tracking-wider mb-1">Account</p>
+              <p className="text-base font-medium text-slate-700 truncate">{user?.name || "User"}</p>
             </div>
           </div>
         </div>
@@ -206,14 +206,14 @@ const Dashboard = () => {
 
       {/* MAIN */}
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="glass rounded-3xl flex-1 p-8 md:p-10 overflow-y-auto border border-white/60 shadow-sm relative">
+        <div className="rounded-3xl flex-1 p-8 md:p-10 overflow-y-auto border border-white/60 shadow-xl relative">
 
           {/* HEADER */}
           <div className="mb-10">
-            <h2 className="text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight">
+            <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">
               Welcome back, {user?.name || "User"} 👋
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-base mt-2 font-medium">
+            <p className="text-slate-400 text-base mt-2 font-medium">
               Create, manage, and download your resumes.
             </p>
           </div>
@@ -222,7 +222,7 @@ const Dashboard = () => {
           <div className="flex flex-wrap gap-4 mb-10">
             <button
               onClick={() => setshowCreateResume(true)}
-              className="group flex items-center gap-2 px-6 py-3.5 bg-indigo-600 text-white rounded-2xl font-semibold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] transition-all hover:bg-indigo-700 active:scale-[0.98] active:shadow-none"
+              className="group flex items-center gap-2 px-6 py-3.5 bg-indigo-600 text-white rounded-2xl font-semibold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] transition-all hover:bg-indigo-500 active:scale-[0.98] active:shadow-none"
             >
               <PlusIcon className="size-5 transition-transform group-hover:rotate-90" />
               Create New Resume
@@ -230,9 +230,9 @@ const Dashboard = () => {
 
             <button
               onClick={() => setshowUploadResume(true)}
-              className="flex items-center gap-2 px-6 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700/60 rounded-2xl font-semibold shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-[0.98]"
+              className="flex items-center gap-2 px-6 py-3.5 bg-slate-100 text-slate-700 border border-slate-200/60 rounded-2xl font-semibold shadow-sm hover:shadow-md hover:bg-slate-50 transition-all active:scale-[0.98]"
             >
-              <UploadCloudIcon className="size-5 text-indigo-500 dark:text-indigo-400" />
+              <UploadCloudIcon className="size-5 text-indigo-500" />
               Upload PDF
             </button>
           </div>
@@ -243,12 +243,12 @@ const Dashboard = () => {
               <LoaderCircleIcon className="size-8 text-indigo-500 animate-spin" />
             </div>
           ) : resumes.length === 0 ? (
-            <div className="bg-white/40 dark:bg-slate-800/40 border-2 border-dashed border-indigo-200 dark:border-indigo-500/30 rounded-3xl p-16 text-center shadow-sm">
-              <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FileText className="size-10 text-indigo-400 dark:text-indigo-300" />
+            <div className="bg-white/40 border-2 border-dashed border-indigo-200 rounded-3xl p-16 text-center shadow-sm">
+              <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FileText className="size-10 text-indigo-400" />
               </div>
-              <h3 className="text-xl font-bold text-slate-700 dark:text-slate-200 mb-2">No resumes found</h3>
-              <p className="text-slate-500 dark:text-slate-400 font-medium max-w-sm mx-auto">
+              <h3 className="text-xl font-bold text-slate-700 mb-2">No resumes found</h3>
+              <p className="text-slate-500 font-medium max-w-sm mx-auto">
                 You haven't created any resumes yet. Start by creating a new one or upload an existing PDF.
               </p>
             </div>
@@ -257,37 +257,37 @@ const Dashboard = () => {
               {resumes.map((resume) => (
                 <div
                   key={resume._id}
-                  className="group bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl border border-white/80 dark:border-slate-700/50 p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                  className="group bg-white/70 backdrop-blur-sm rounded-3xl border border-black/50 p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    <FileText className="size-6 text-indigo-600 dark:text-indigo-400" />
+                    <FileText className="size-6 text-indigo-600" />
                   </div>
 
-                  <h3 className="font-bold text-slate-800 dark:text-white text-lg mb-1 truncate">
+                  <h3 className="font-bold text-slate-800 text-lg mb-1 truncate">
                     {resume.title || "Untitled Resume"}
                   </h3>
 
-                  <p className="text-sm text-slate-400 dark:text-slate-500 font-medium mb-8">
+                  <p className="text-sm text-slate-500 font-medium mb-8">
                     Updated {new Date(resume.updatedAt).toLocaleDateString()}
                   </p>
 
-                  <div className="flex justify-between items-center mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                  <div className="flex justify-between items-center mt-auto pt-4 border-t border-slate-700">
                     <button
                       onClick={() => navigate(`/app/builder/${resume._id}`)}
-                      className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center gap-1.5 bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1.5 rounded-lg transition-colors"
+                      className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5 bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors"
                     >
                       <Edit className="size-4" />
                       Edit
                     </button>
 
                     <div className="flex gap-2">
-                      <button
+                      {/* <button
                         onClick={() => navigate(`/view/${resume._id}`)}
-                        className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 rounded-lg transition-all"
+                        className="p-2 text-slate-600 hover:text-indigo-800 hover:bg-indigo-500 rounded-lg transition-all"
                         title="Preview"
                       >
-                        <Eye className="size-4" />
-                      </button>
+                         <Eye className="size-4" /> 
+                      </button> */}
 
                       <button
                         onClick={() => deleteResume(resume._id)}

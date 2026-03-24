@@ -29,30 +29,30 @@ const Projects = ({ data, onChange }) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-gray-100">Projects</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Add your projects and portfolio work</p>
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900">Projects</h3>
+          <p className="text-sm text-gray-500">Add your projects and portfolio work</p>
         </div>
         <button
           onClick={addProject}
-          className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 rounded hover:bg-purple-200 dark:hover:bg-purple-500/30 transition-colors"
+          className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
         >
-          <Plus className="size-4 text-purple-600 dark:text-purple-400" />
+          <Plus className="size-4 text-purple-600" />
           Add Project
         </button>
       </div>
 
       {data.length === 0 ? (
-        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-          <FolderIcon className="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
+        <div className="text-center py-8 text-gray-500">
+          <FolderIcon className="w-12 h-12 mx-auto mb-3 text-gray-300" />
           <p>No projects added yet.</p>
           <p className="text-sm">Click "Add Project" to get started</p>
         </div>
       ) : (
         <div className="space-y-4">
           {data.map((project, index) => (
-            <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg space-y-3">
+            <div key={index} className="p-4 border border-gray-200 rounded-lg space-y-3">
               <div className="flex justify-between items-start">
-                <h4 className="dark:text-gray-200">Project #{index + 1}</h4>
+                <h4 className="text-gray-600">Project #{index + 1}</h4>
                 <button
                   onClick={() => removeProject(index)}
                   className="text-red-500 hover:text-red-700 transition-colors"
@@ -67,14 +67,14 @@ const Projects = ({ data, onChange }) => {
                   onChange={(e) => updateProject(index, "name", e.target.value)}
                   type="text"
                   placeholder="Project Name"
-                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 bg-white text-slate-900 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                 />
 
                 <textarea
                   value={project.description || ""}
                   onChange={(e) => updateProject(index, "description", e.target.value)}
                   rows={3}
-                  className="w-full text-sm px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg resize-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                  className="w-full text-sm px-3 py-2 border border-gray-300 bg-white text-slate-900 rounded-lg resize-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                   placeholder="Describe your project, key features, and your role..."
                 />
 
@@ -84,7 +84,7 @@ const Projects = ({ data, onChange }) => {
                     onChange={(e) => updateProject(index, "technologies", e.target.value)}
                     type="text"
                     placeholder="Technologies Used (e.g., React, Node.js)"
-                    className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                    className="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                   />
 
                   <input
@@ -92,7 +92,7 @@ const Projects = ({ data, onChange }) => {
                     onChange={(e) => updateProject(index, "link", e.target.value)}
                     type="url"
                     placeholder="Project Link (GitHub, Live Demo, etc.)"
-                    className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                    className="px-3 py-2 text-sm border border-gray-300 bg-white text-slate-900 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                   />
                 </div>
 
@@ -102,7 +102,7 @@ const Projects = ({ data, onChange }) => {
                     onChange={(e) => updateProject(index, "start_date", e.target.value)}
                     type="month"
                     placeholder="Start Date"
-                    className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                    className="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                   />
 
                   <input
@@ -110,7 +110,7 @@ const Projects = ({ data, onChange }) => {
                     onChange={(e) => updateProject(index, "end_date", e.target.value)}
                     type="month"
                     placeholder="End Date (optional)"
-                    className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                    className="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                   />
                 </div>
               </div>
