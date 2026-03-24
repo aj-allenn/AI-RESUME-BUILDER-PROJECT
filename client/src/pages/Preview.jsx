@@ -11,7 +11,7 @@ const Preview = () => {
 
   const loadResume = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/resumes/public/${resumeId}`)
+      const res = await fetch(`https://ai-resume-builder-project-backend.onrender.com/api/resumes/public/${resumeId}`)
       
       if (res.ok) {
         const data = await res.json()
