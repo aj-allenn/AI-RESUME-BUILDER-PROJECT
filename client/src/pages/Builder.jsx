@@ -57,7 +57,7 @@ const Builder = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/resumes/${resumeId}`, {
+      const res = await fetch(`https://ai-resume-builder-project-backend.onrender.com/api/resumes/${resumeId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,8 +103,8 @@ const Builder = () => {
     try {
       const token = localStorage.getItem("token");
       const url = resumeData._id
-        ? `http://localhost:5000/api/resumes/${resumeData._id}`
-        : 'http://localhost:5000/api/resumes';
+        ? `https://ai-resume-builder-project-backend.onrender.com/api/resumes/${resumeData._id}`
+        : 'https://ai-resume-builder-project-backend.onrender.com/api/resumes';
 
       const method = resumeData._id ? 'PUT' : 'POST';
 
