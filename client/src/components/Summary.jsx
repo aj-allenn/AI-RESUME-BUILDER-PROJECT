@@ -8,7 +8,7 @@ const Summary = ({data,onChange,resumeData}) => {
     setEnhancing(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch('http://localhost:5000/api/ai/enhance-summary', 
+      const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/ai/enhance-summary', 
         {
 
         method: 'POST',
