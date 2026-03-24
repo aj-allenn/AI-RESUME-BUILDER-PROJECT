@@ -84,7 +84,7 @@ const Experience = ({data,onChange}) => {
                               onClick={async () => {
                                 try {
                                   const token = localStorage.getItem("token");
-                                  const res = await fetch('http://localhost:5000/api/ai/enhance-experience', {
+                                  const res = await fetch('https://ai-resume-builder-project-backend.onrender.com/api/ai/enhance-experience', {
                                     method: 'POST',
                                     headers: {
                                       'Content-Type': 'application/json',
