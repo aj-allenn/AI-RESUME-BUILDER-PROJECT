@@ -47,7 +47,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify';
 import { LogOut } from 'lucide-react';
 const Layout = () => {
-    const user={name:"allen"};
+    const user={name:""};
     const navigate = useNavigate()
     const logoutUser= ()=>{
       localStorage.removeItem("token");

@@ -100,7 +100,7 @@ useEffect(() => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3800/60 border bg-white border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400 "
+                className="w-full px-4 py-2 border bg-white border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400 "
               />
             </div>
           )}
@@ -115,13 +115,13 @@ useEffect(() => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-white border border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400"
+              className="w-full px-4 py-2 bg-white border border-gray-300 text-black rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder-slate-400"
             />
           </div>
 
           {/* Password */}
           <div>
-            <div className="flex justify-between items-center mb-1.5 ml-1">
+            <div className="flex justify-between items-center mb-1 ml-1">
               <label className="block text-sm font-semibold text-slate-700">Password</label>
               {state === "login" && (
                 <button

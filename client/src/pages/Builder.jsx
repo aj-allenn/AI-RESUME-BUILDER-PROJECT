@@ -273,8 +273,8 @@ const Builder = () => {
     return (
       <div className="min-h-screen bg-mesh-light flex justify-center pt-32">
         <div className="flex flex-col items-center gap-4 bg-white/60 glass rounded-3xl p-10">
-          <div className="w-12 h-12 border-4 border-indigo-200 dark:border-indigo-500/30 border-t-indigo-600 dark:border-t-indigo-400 rounded-full animate-spin"></div>
-          <p className="text-slate-600 dark:text-slate-300 font-semibold text-lg animate-pulse">Loading your workspace...</p>
+          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+          <p className="text-slate-600 font-semibold text-lg animate-pulse">Loading your workspace...</p>
         </div>
       </div>
     );
