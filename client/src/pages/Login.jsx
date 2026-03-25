@@ -33,13 +33,8 @@ useEffect(() => {
 
   const endpoint =
     state === "login"
-<<<<<<< HEAD
-      ? "https://ai-resume-builder-project-backend.onrender.com/auth/login"
-      : "https://ai-resume-builder-project-backend.onrender.com/auth/register";
-=======
       ? `${API}/auth/login`
       : `${API}/auth/register`;
->>>>>>> 0df39cc (final updation)
 
   const res = await fetch(endpoint, {
     method: "POST",
@@ -172,22 +167,14 @@ useEffect(() => {
         {/* Social */}
         <div className="grid grid-cols-2 gap-3">
           <a
-<<<<<<< HEAD
-            href="https://ai-resume-builder-project-backend.onrender.com/auth/google"
-=======
             href={`${API}/auth/google`}
->>>>>>> 0df39cc (final updation)
             className="flex items-center justify-center gap-2 w-full bg-white/80 border border-slate-200 dark:border-slate-700 py-2.5 rounded-xl hover:bg-white hover:shadow-lg transition-all text-slate-700 font-semibold text-sm group"
           >
             <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" className="w-4 h-4 group-hover:scale-110 transition-transform" />
             Google
           </a>
           <a
-<<<<<<< HEAD
-             href="https://ai-resume-builder-project-backend.onrender.com/auth/github"
-=======
              href={`${API}/auth/github`}
->>>>>>> 0df39cc (final updation)
              className="flex items-center justify-center gap-2 w-full bg-slate-900 border border-slate-900 py-2.5 rounded-xl hover:bg-slate-800 hover:shadow-md transition-all text-white font-semibold text-sm group"
           >
              <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 group-hover:scale-110 transition-transform"><path d="M12 0C5.37 0 0 5.48 0 12.24c0 5.41 3.44 9.99 8.21 11.61.6.12.82-.26.82-.58v-2.04c-3.34.74-4.04-1.65-4.04-1.65-.55-1.42-1.34-1.8-1.34-1.8-1.09-.76.08-.75.08-.75 1.2.09 1.83 1.27 1.83 1.27 1.07 1.87 2.81 1.33 3.5 1.02.11-.8.42-1.33.76-1.64-2.66-.31-5.47-1.36-5.47-6.06 0-1.34.46-2.44 1.23-3.3-.12-.31-.54-1.57.12-3.27 0 0 1-.33 3.3 1.26a11.18 11.18 0 0 1 6 0c2.3-1.59 3.3-1.26 3.3-1.26.66 1.7.24 2.96.12 3.27.77.86 1.23 1.96 1.23 3.3 0 4.71-2.82 5.75-5.5 6.05.43.38.82 1.12.82 2.26v3.35c0 .32.22.7.82.58C20.56 22.23 24 17.65 24 12.24 24 5.48 18.63 0 12 0z" /></svg>

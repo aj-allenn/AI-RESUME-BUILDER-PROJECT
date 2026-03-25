@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"          # maps backend container port to host
+    restart: unless-stopped
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=${MONGO_URI}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    env_file:
+      - ./server/.env       # contains all sensitive keys, including Atlas URI
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"            # maps frontend container port to host
+    restart: unless-stopped
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://backend:5000  # internal Docker network address
+
+networks:
+  app-network:
+    driver: bridge
