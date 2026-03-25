@@ -14,11 +14,14 @@ import passport from "./config/passport.js";
 const app= express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_PROD
+];
+
 app.use(
     cors({
-        origin:["https://ai-resume-builder-project-frontend.onrender.com",
-                 "http://localhost:5173" 
-            ],
+        origin:allowedOrigins,
         credentials:true,
     })
 );
