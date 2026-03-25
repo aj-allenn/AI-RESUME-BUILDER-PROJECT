@@ -1,4 +1,4 @@
-import 'dotenv/config.js';
+
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -16,7 +16,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
     cors({
-        origin:"https://ai-resume-builder-project-frontend.onrender.com",
+        origin:["https://ai-resume-builder-project-frontend.onrender.com",
+                 "http://localhost:5173" 
+            ],
         credentials:true,
     })
 );
