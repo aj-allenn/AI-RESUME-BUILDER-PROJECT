@@ -3,4 +3,6 @@ server/node_modules/
 client/node_modules/
 server/uploads/
 .env
-.env.production
+.env.*
+server/.env
+client/.env
